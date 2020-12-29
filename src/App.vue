@@ -49,7 +49,7 @@ export default {
 
 <style lang="scss">
 #app {
-  @apply bg-primary text-primary-contrast fixed inset-0 grid overflow-hidden;
+  @apply bg-primary text-primary-contrast fixed inset-0 grid overflow-hidden grid;
   grid-template-rows: auto 1fr;
 }
 </style>
