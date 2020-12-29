@@ -1,0 +1,27 @@
+@import "../variables";
+@import "../relief";
+
+@mixin btn-base($color_name, $value) {
+  @apply uppercase font-bold transition-all;
+  @extend .relief-#{$color_name}-shadowed;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: lighten($value, 10%);
+  }
+  &:active {
+    @extend .relief-#{$color_name};
+  }
+}
+
+@each $name, $value in $colors {
+  .btn-#{$name} {
+    @include btn-base($name, $value);
+    @apply p-3 rounded-lg;
+  }
+  .btn-#{$name}-icon {
+    @include btn-base($name, $value);
+    @apply rounded-full h-14 w-14 flex items-center justify-center;
+  }
+}

@@ -1,0 +1,47 @@
+@import "variables";
+
+$shadow-width: 0.15rem;
+$ext-down: $shadow-width $shadow-width $shadow-width * 2;
+$ext-up: $shadow-width * -1 $shadow-width * -1 $shadow-width * 2;
+$int-up: $shadow-width $shadow-width $shadow-width * 2 inset;
+$int-down: $shadow-width * -1 $shadow-width * -1 $shadow-width * 2 inset;
+
+@function shadow-light($color) {
+  @return desaturate(lighten($color, 25%), 20%);
+}
+@function shadow-dark($color) {
+  @return desaturate(darken($color, 25%), 20%);
+}
+
+@mixin poping($color) {
+  box-shadow: $int-up shadow-light($color), $int-down shadow-dark($color);
+}
+@mixin poping-shadowed($color) {
+  box-shadow: $int-up shadow-light($color), $int-down shadow-dark($color),
+    $ext-down shadow-dark(color("primary"));
+}
+@mixin poping-outer($color) {
+  box-shadow: $ext-up shadow-light($color), $ext-down shadow-dark($color);
+}
+@mixin poping-reverse($color) {
+  box-shadow: $int-down shadow-light($color), $int-up shadow-dark($color);
+}
+
+@each $name, $value in $colors {
+  .relief-#{$name} {
+    @apply bg-#{$name} text-#{$name}-contrast;
+    @include poping($value);
+  }
+  .relief-#{$name}-shadowed {
+    @apply bg-#{$name} text-#{$name}-contrast;
+    @include poping-shadowed($value);
+  }
+  .relief-#{$name}-outer {
+    @apply bg-#{$name} text-#{$name}-contrast;
+    @include poping-outer($value);
+  }
+  .relief-#{$name}-reverse {
+    @apply bg-#{$name} text-#{$name}-contrast;
+    @include poping-reverse($value);
+  }
+}

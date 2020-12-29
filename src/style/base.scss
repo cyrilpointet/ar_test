@@ -1,0 +1,16 @@
+@import "reset";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "variables";
+@import "relief";
+@import "./elements/buttons";
+
+// create css var for tailwind config
+:root {
+  @each $name, $value in $colors {
+    --color-#{$name}: #{$value};
+    --color-#{$name}-contrast: #{contrast-color($value)};
+  }
+}

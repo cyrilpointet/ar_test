@@ -1,0 +1,19 @@
+// colors --------------------------------------
+$colors: (
+        "primary": #eeeeee,
+        "accent": #1a8a9a,
+        "warning": #c21e1e
+);
+
+@function color($color) {
+  @return map-get($colors, $color);
+}
+
+@function contrast-color($color) {
+  @debug $color;
+  @if lightness($color) < 50 {
+    @return #eeeeee;
+  } @else {
+    @return #111111;
+  }
+}
